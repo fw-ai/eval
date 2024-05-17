@@ -47,7 +47,7 @@ python -m llm_eval.generator url humaneval
 ### Generic
 
 Just issues prompts from a given dataset.
-
+Example for a builtin 'fastchat' dataset:
 ```bash
 python -m llm_eval.generator url -o fastchat.jsonl generic --dataset fastchat
 ```
