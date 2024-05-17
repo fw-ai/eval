@@ -49,7 +49,7 @@ python -m llm_eval.generator url humaneval
 Just issues prompts from a given dataset.
 
 ```bash
-python -m llm_eval.generator url -o fastchat.jsonl generic --ds-name fastchat
+python -m llm_eval.generator url -o fastchat.jsonl generic --dataset fastchat
 ```
 
 ### Replay
@@ -75,8 +75,8 @@ and then replaying control model responses against 'test' model.
 The following example uses 'generic' task to run 'fastchat' dataset against fp16 model
 and then replays responses against fp8 model:
 ```bash
-python -m llm_eval.generator -o fp16.jsonl --max-tokens 256 generic --ds-name fastchat
-python -m llm_eval.generator -o fp8.jsonl --max-tokens 256 replay -f fp16.jsonl
+python -m llm_eval.generator url -o fp16.jsonl --max-tokens 256 generic --dataset fastchat
+python -m llm_eval.generator url -o fp8.jsonl --max-tokens 256 replay -f fp16.jsonl
 python -m llm_eval.analyzer diff fp16.jsonl fp8.jsonl
 ```
 
