@@ -52,6 +52,17 @@ Just issues prompts from a given dataset.
 python -m llm_eval.generator url -o fastchat.jsonl generic --dataset fastchat
 ```
 
+Using custom dataset.
+Assuming /my-datasets/my-numbers/test.jsonl file has newline-delimited json objects w/ "prompt" attribute, e.g.
+```
+{"prompt": "one two three"}
+{"prompt": "1 2 3 4 5"}
+```
+it can be run with:
+```bash
+python -m llm_eval.generator url -o custom.jsonl generic --dataset my-numbers --ds-cache-dir /my-datasets
+```
+
 ### Replay
 
 Allows to replay response file from other tasks against a different model.

@@ -442,6 +442,11 @@ def main():
         help="Top log probs to retrieve",
     )
     parser.add_argument(
+        "--echo",
+        help="Whether to pass 'echo=true' to text completion API",
+        action=argparse.BooleanOptionalAction,
+    )
+    parser.add_argument(
         "-l",
         "--limit",
         type=int,
