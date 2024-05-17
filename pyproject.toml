@@ -39,6 +39,9 @@ version = "0.0.1"
 [tool.setuptools.packages.find]
 include = ["llm_eval", "llm_eval.*"]
 
+[tool.setuptools.package-data]
+"*" = ["*.jsonl", "*.jinja"]
+
 [tool.black]
 target-version = ['py36']
 exclude = '.*\.ipynb'
