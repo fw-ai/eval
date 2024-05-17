@@ -34,7 +34,7 @@ python -m llm_eval.generator url mmlu
 LLaMA V3 instruct model:
 
 ```bash
-python -m llm_eval.generator url --prompt-style llama-v3-instruct mmlu
+python -m llm_eval.generator url mmlu --prompt-style llama-v3-instruct
 ```
 
 ### HumanEval
@@ -49,7 +49,7 @@ python -m llm_eval.generator url humaneval
 Just issues prompts from a given dataset.
 Example for a builtin 'fastchat' dataset:
 ```bash
-python -m llm_eval.generator url -o fastchat.jsonl generic --dataset fastchat
+python -m llm_eval.generator url generic -o fastchat.jsonl --dataset fastchat
 ```
 
 Using custom dataset.
@@ -60,7 +60,7 @@ Assuming /my-datasets/my-numbers/test.jsonl file has newline-delimited json obje
 ```
 it can be run with:
 ```bash
-python -m llm_eval.generator url -o custom.jsonl generic --dataset my-numbers --ds-cache-dir /my-datasets
+python -m llm_eval.generator url generic -o custom.jsonl --dataset my-numbers --ds-cache-dir /my-datasets
 ```
 
 ### Replay
@@ -72,7 +72,7 @@ which ensures that generated outputs are also identical.
 Differece will be in log probabilities, it's used in 'Divergence Test' below.
 
 ```bash
-python -m llm_eval.generator url -o replayed.jsonl replay -f fastchat.jsonl
+python -m llm_eval.generator url replay -o replayed.jsonl  -f fastchat.jsonl
 ```
 
 
@@ -86,8 +86,8 @@ and then replaying control model responses against 'test' model.
 The following example uses 'generic' task to run 'fastchat' dataset against fp16 model
 and then replays responses against fp8 model:
 ```bash
-python -m llm_eval.generator url -o fp16.jsonl --max-tokens 256 generic --dataset fastchat
-python -m llm_eval.generator url -o fp8.jsonl --max-tokens 256 replay -f fp16.jsonl
+python -m llm_eval.generator url generic -o fp16.jsonl --max-tokens 256 --dataset fastchat
+python -m llm_eval.generator url replay -o fp8.jsonl --max-tokens 256 -f fp16.jsonl
 python -m llm_eval.analyzer diff fp16.jsonl fp8.jsonl
 ```
 

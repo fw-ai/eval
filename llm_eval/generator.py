@@ -31,7 +31,7 @@ class GeneratorArgs:
     # URL arguments.
     host: str = "http://localhost:80"
     model_name: str | None = None
-    batch_size: int = 16
+    batch_size: int = 64
     auth_token: str | None = None
 
     # Task common arguments.
@@ -423,37 +423,6 @@ def main():
         help="Mode to run: url (remote LLM) or hf (local Huggingface LLM)",
         choices=["url", "hf"],
     )
-    parser.add_argument(
-        "-o",
-        "--out-file",
-        type=str,
-        help="Path where to store responses",
-        default=args.out_file,
-    )
-    parser.add_argument(
-        "--max-tokens",
-        type=int,
-        help="Max tokens",
-        default=args.max_tokens,
-    )
-    parser.add_argument(
-        "--logprobs",
-        type=int,
-        help="Top log probs to retrieve",
-    )
-    parser.add_argument(
-        "--echo",
-        help="Whether to pass 'echo=true' to text completion API",
-        action=argparse.BooleanOptionalAction,
-    )
-    parser.add_argument(
-        "-l",
-        "--limit",
-        type=int,
-        help="Max prompts",
-        default=args.limit,
-    )
-    parser.add_argument("--stop-words", nargs="+", type=str)
 
     # URL mode.
     url_group = parser.add_argument_group("url")
@@ -485,6 +454,37 @@ def main():
     def _add_task(parsers, name: str):
         parser = parsers.add_parser(name)
         # Add task common args.
+        parser.add_argument(
+            "-o",
+            "--out-file",
+            type=str,
+            help="Path where to store responses",
+            default=args.out_file,
+        )
+        parser.add_argument(
+            "--max-tokens",
+            type=int,
+            help="Max tokens",
+            default=args.max_tokens,
+        )
+        parser.add_argument(
+            "--logprobs",
+            type=int,
+            help="Top log probs to retrieve",
+        )
+        parser.add_argument(
+            "--echo",
+            help="Whether to pass 'echo=true' to text completion API",
+            action=argparse.BooleanOptionalAction,
+        )
+        parser.add_argument(
+            "-l",
+            "--limit",
+            type=int,
+            help="Max prompts",
+            default=args.limit,
+        )
+        parser.add_argument("--stop-words", nargs="+", type=str)
         parser.add_argument("-p", "--prompt-style", type=str, default=args.prompt_style)
         parser.add_argument(
             "--ds-cache-dir",
